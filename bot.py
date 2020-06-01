@@ -9,26 +9,24 @@ def send_furpic(message):
 	with open ('pic.txt', 'r') as file:
 		lines = file.readlines()
 		URL = random.choice(lines)
-	bot.reply_to(message, URL)
+	bot.send_photo(message.chat.id, URL)
 
 @bot.message_handler(commands=['furgif'])
 def send_furgif(message):
 	with open ('gif.txt', 'r') as file:
 		lines = file.readlines()
 		URL = random.choice(lines)
-	bot.reply_to(message, URL)
+	bot.send_document(message.chat.id, URL)
 
 @bot.message_handler(commands=['ping'])
 def send_ping(message):
-	bot.reply_to(message, "Понг!")
+	bot.send_message(message.chat.id, "Понг!")
 
 @bot.message_handler(commands=['start'])
 def send_markup(message):
 	chat_id = message.chat.id	
-	markup = types.ReplyKeyboardMarkup()
-	itembtn1 = types.KeyboardButton('/furpic')
-	itembtn2 = types.KeyboardButton('/furgif')
-	markup.add(itembtn1, itembtn2)
+	markup = types.ReplyKeyboardMarkup(True, False)
+	markup.row('/furpic', '/furgif')
 	bot.send_message(chat_id, "Что отослать?", reply_markup=markup)
 
 bot.polling()
