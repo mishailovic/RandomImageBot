@@ -5,25 +5,25 @@ import random
 bot = telebot.TeleBot("YOUR TOKEN")
 
 @bot.message_handler(commands=['furpic'])
-def send_welcome(message):
+def send_furpic(message):
 	with open ('pic.txt', 'r') as file:
 		lines = file.readlines()
 		URL = random.choice(lines)
 	bot.reply_to(message, URL)
 
 @bot.message_handler(commands=['furgif'])
-def send_welcome(message):
+def send_furgif(message):
 	with open ('gif.txt', 'r') as file:
 		lines = file.readlines()
 		URL = random.choice(lines)
 	bot.reply_to(message, URL)
 
 @bot.message_handler(commands=['ping'])
-def send_welcome(message):
+def send_ping(message):
 	bot.reply_to(message, "Понг!")
 
 @bot.message_handler(commands=['start'])
-def send_welcome(message):
+def send_markup(message):
 	chat_id = message.chat.id	
 	markup = types.ReplyKeyboardMarkup()
 	itembtn1 = types.KeyboardButton('/furpic')
