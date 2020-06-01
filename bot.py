@@ -4,14 +4,14 @@ import random
 
 bot = telebot.TeleBot("YOUR TOKEN")
 
-@bot.message_handler(commands=['furpic'])
+@bot.message_handler(regexp="Пикчу")
 def send_furpic(message):
 	with open ('pic.txt', 'r') as file:
 		lines = file.readlines()
 		URL = random.choice(lines)
 	bot.send_photo(message.chat.id, URL)
 
-@bot.message_handler(commands=['furgif'])
+@bot.message_handler(regexp="Гифку")
 def send_furgif(message):
 	with open ('gif.txt', 'r') as file:
 		lines = file.readlines()
@@ -26,7 +26,7 @@ def send_ping(message):
 def send_markup(message):
 	chat_id = message.chat.id	
 	markup = types.ReplyKeyboardMarkup(True, False)
-	markup.row('/furpic', '/furgif')
+	markup.row('Пикчу', 'Гифку')
 	bot.send_message(chat_id, "Что отослать?", reply_markup=markup)
 
 bot.polling()
